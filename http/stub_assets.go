@@ -7,7 +7,7 @@ import (
 )
 
 func init() {
-	uiBuiltIn = false
+	uiBuiltIn = true
 }
 
 // assetFS is a stub for building Vault without a UI.

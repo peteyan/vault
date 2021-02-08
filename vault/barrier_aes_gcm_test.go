@@ -4,14 +4,15 @@ import (
 	"bytes"
 	"context"
 	"crypto/rand"
+	"encoding/hex"
 	"encoding/json"
-	"testing"
-
-	log "github.com/hashicorp/go-hclog"
 	"github.com/hashicorp/vault/sdk/helper/logging"
 	"github.com/hashicorp/vault/sdk/logical"
 	"github.com/hashicorp/vault/sdk/physical"
 	"github.com/hashicorp/vault/sdk/physical/inmem"
+	"testing"
+
+	log "github.com/hashicorp/go-hclog"
 )
 
 var (
@@ -208,6 +209,13 @@ func TestAESGCMBarrier_Confidential(t *testing.T) {
 	// Initialize and unseal
 	key, _ := b.GenerateKey(rand.Reader)
 	b.Initialize(context.Background(), key, nil, rand.Reader)
+	// todo
+	//keyStr := make([]string, 0, len(key))
+	//for _, k := range key {
+	//	keyStr = append(keyStr, hex.EncodeToString(byte(k)))
+	//}
+	keyStr := hex.EncodeToString(key)
+	logger.Debug("the key is", "keyStr", keyStr)
 	b.Unseal(context.Background(), key)
 
 	// Put a logical entry

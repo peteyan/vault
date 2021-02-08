@@ -109,3 +109,6 @@ website/components/node_modules
 
 .buildcache/
 .releaser/
+
+# go files for build output
+output
